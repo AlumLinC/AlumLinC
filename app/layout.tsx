@@ -4,6 +4,9 @@ export type RootLayoutProps = {
     children: ReactNode;
 };
 
+/**
+ * Root of the page
+*/
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en">
