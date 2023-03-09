@@ -1,0 +1,62 @@
+.nav {
+    --font-size: 1.25rem;
+
+    background-color: var(--sub-bg-color);
+
+    width: 100%;
+    height: 7vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+    margin: 0;
+    font-size: var(--font-size);
+    font-family: "Nova Round", "Roboto", sans-serif;
+    text-align: center;
+}
+
+.nav > *:first-child {
+    margin-left: 1%;
+}
+
+.nav > *:last-child {
+    margin-right: 1%;
+}
+
+#navMain {
+    margin-right: auto;
+    font-size: calc(var(--font-size) + 0.65rem);
+    font-weight: bold;
+    text-align: left;
+}
+
+#navAuthStart {
+    margin-left: 10%;
+}
+
+.navItem {
+    text-decoration: none;
+}
+
+.navItem:not(#navMain) {
+    position: relative;
+    outline: none;
+}
+
+a.navItem:not(#navMain)::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 0em;
+    background-color: var(--primary);
+    transition: height 100ms;
+}
+
+a.navItem:not(#navMain):hover::after,
+a.navItem:not(#navMain):focus::after,
+a.navItem:not(#navMain)[data-force-select="true"]::after {
+    height: 0.1em;
+}
