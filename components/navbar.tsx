@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggleButton from "components/theme-toggle";
 import styles from "./navbar.module.css";
 
 /** NavBar
@@ -49,6 +50,7 @@ export default function NavBar() {
             >
                 Log In
             </Link>
+            <ThemeToggleButton />
         </nav>
     );
 }

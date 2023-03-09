@@ -4,6 +4,7 @@
     flex-direction: column;
     max-height: 80vh;
     font-family: "Nova Round", "Roboto", sans-serif;
+    background-color: transparent;
 }
 
 .topBanner > div {
@@ -13,6 +14,7 @@
 .topBanner > svg {
     width: 100%;
     height: auto;
+    fill: var(--primary);
 }
 
 .topBannerTitle {
