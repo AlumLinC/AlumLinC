@@ -5,7 +5,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint . --ext .tsx .ts --no-error-on-unmatched-pattern",
-        "format": "prettier --check --write ."
+        "format": "prettier --check --write .",
+        "find-dead": "ts-prune"
     },
     "prettier": {
         "tabWidth": 4,
@@ -23,11 +24,17 @@
         "@types/react": "18.0.28",
         "@typescript-eslint/eslint-plugin": "5.54.1",
         "@typescript-eslint/parser": "5.54.1",
-        "eslint": "8.19.0",
+        "eslint": "8.35.0",
         "eslint-config-next": "latest",
         "eslint-config-prettier": "8.6.0",
+        "eslint-config-standard-with-typescript": "34.0.0",
+        "eslint-plugin-import": "2.27.5",
+        "eslint-plugin-n": "15.6.1",
+        "eslint-plugin-promise": "6.1.1",
+        "eslint-plugin-react": "7.32.2",
         "prettier": "^2.7.1",
         "sass": "1.58.3",
+        "ts-prune": "0.10.3",
         "typescript": "4.7.4"
     }
 }

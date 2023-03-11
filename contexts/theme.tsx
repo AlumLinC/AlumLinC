@@ -1,45 +1,52 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import type { ReactNode } from "@types/react";
+import type { ReactElement } from "react";
 
-const ThemeContext = createContext();
+export interface ThemeContextType {
+    theme: string;
+    setTheme: (v: string) => void;
+}
 
-export type ThemeProviderProps = {
-    children: ReactNode;
-};
+const ThemeContext = createContext<ThemeContextType>({
+    theme: "light",
+    setTheme: (v: string): void => {
+        throw new Error(
+            `Cannot set theme (to ${v}) from a default context value`
+        );
+    },
+});
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
-    // Preload the theme
-    let themeQuery = "light";
-    if (localStorage) {
-        themeQuery = localStorage.getItem("theme") ?? "light";
-    }
+export interface ThemeProviderProps {
+    children: ReactElement[];
+}
 
-    // Setup state
-    const [theme, setTheme] = useState(themeQuery);
+export function ThemeProvider({ children }: ThemeProviderProps): ReactElement {
+    // Store the theme
+    const [theme, setTheme] = useState("light");
+
+    // Track if the component has mounted onto the DOM yet
+    // Once it has, we will have access to localStorage
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect((): void => {
+        // useEffect runs on the client and won't be SSRed
+        setHasMounted(true);
+        console.log("Mounted ThemeProvider");
+        const lsTheme = localStorage.getItem("theme") ?? "light";
+        console.log("lsTheme", lsTheme);
+        setTheme(lsTheme);
+    }, []);
 
     // Function for updating the theme respeccting the localstorage
-    const updateTheme = (v) => {
-        if (localStorage) {
-            localStorage.setItem("theme", v);
+    const updateTheme = (v: string): void => {
+        if (!hasMounted) {
+            console.warn("Waiting for ThemeProvider to mount");
+            return;
         }
+        localStorage.setItem("theme", v);
         setTheme(v);
     };
-
-    useEffect(() => {
-        if (localStorage) {
-            const t = localStorage.getItem("theme");
-
-            console.log(t);
-
-            if (!t) {
-                localStorage.setItem("theme", "light");
-            }
-
-            updateTheme(t);
-        }
-    });
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme: updateTheme }}>
@@ -50,4 +57,4 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     );
 }
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = (): ThemeContextType => useContext(ThemeContext);
