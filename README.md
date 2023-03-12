@@ -33,3 +33,23 @@ Once your code is pushed, you may open a pull request to merge your code into `m
 The `deploy` branch is used to ship code to production.
 For this reason, only the codebase manager will be allowed to push and merge code into this branch.
 Please don't ask for your code to be shipped. It will be shipped once the project manager determines that the codebase is ready.
+
+## Building the Docker Image
+
+The docker image can be build using Docker Compose.
+
+```
+docker-compose build
+```
+
+Run it with:
+
+```
+docker-compose up
+```
+
+Stop it with:
+
+```
+docker-compose down
+```

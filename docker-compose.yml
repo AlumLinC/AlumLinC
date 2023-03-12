@@ -1,0 +1,12 @@
+version: '3'
+services:
+  app:
+    image: https123456789/alumlinc:0.0.1
+    build:
+      args:
+        DOCKER_BUILDKIT: 1
+      context: ./
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
